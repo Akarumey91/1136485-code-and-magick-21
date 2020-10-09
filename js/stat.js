@@ -17,8 +17,13 @@ var BAR = {
   X: CLOUD_WIDTH / 2,
   Y: CLOUD_HEIGHT - 20,
   WIDTH: 40,
-  HEIGHT: -150,
+  MAX_HEIGHT: -150,
   WIDTH_BETWEEN_BARS: 50,
+};
+
+var PLAYER_TIME = {
+  X: CLOUD_WIDTH / 2,
+  Y: 240,
 };
 
 var CLOUD_HEADER = {
@@ -62,7 +67,19 @@ window.renderStatistics = function (ctx, players, times) {
   for (var i = 0; i < players.length; i++) {
     ctx.fillText(players[i], PLAYER.X, PLAYER.Y);
     PLAYER.X += BAR.WIDTH_BETWEEN_BARS;
-    ctx.fillRect(BAR.X, BAR.Y, BAR.WIDTH, (BAR.HEIGHT * times[i]) / maxTime);
+  }
+  for (var i = 0; i < players.length; i++) {
+    var HEIGHT = Math.floor((BAR.MAX_HEIGHT * times[i]) / maxTime);
+    if (players[i] === "Вы") {
+      ctx.fillStyle = `rgba(255, 0, 0, 1)`;
+    } else {
+      ctx.fillStyle = `hsl(240, ${Math.random() * 100 + `%`}, 50%)`;
+    }
+    ctx.fillRect(BAR.X, BAR.Y, BAR.WIDTH, HEIGHT);
     BAR.X += BAR.WIDTH_BETWEEN_BARS;
+    ctx.fillStyle = "black";
+    ctx.fillText(Math.floor(times[i]), PLAYER_TIME.X, HEIGHT + PLAYER_TIME.Y);
+    PLAYER_TIME.X += BAR.WIDTH_BETWEEN_BARS;
+    console.log(HEIGHT);
   }
 };
