@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
@@ -6,7 +6,6 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
 var FONT_GAP = 15;
-var TEXT_WIDTH = 50;
 
 var PLAYER = {
   X: CLOUD_WIDTH / 2,
@@ -50,16 +49,16 @@ var getMaxElement = function (arr) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, "rgba(0, 0, 0, 0.7)");
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, "#fff");
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
 
-  ctx.fillStyle = "#000";
+  ctx.fillStyle = `#000`;
   ctx.font = `${CLOUD_HEADER.SIZE} ${CLOUD_HEADER.FONT}`;
   ctx.fillText(`Ура вы победили!`, `${CLOUD_HEADER.X}`, `${CLOUD_HEADER.Y}`);
   ctx.fillText(
-    `Список результатов:`,
-    `${CLOUD_HEADER.X}`,
-    `${CLOUD_HEADER.Y + FONT_GAP}`
+      `Список результатов:`,
+      `${CLOUD_HEADER.X}`,
+      `${CLOUD_HEADER.Y + FONT_GAP}`
   );
 
   var maxTime = getMaxElement(times);
@@ -68,18 +67,17 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillText(players[i], PLAYER.X, PLAYER.Y);
     PLAYER.X += BAR.WIDTH_BETWEEN_BARS;
   }
-  for (var i = 0; i < players.length; i++) {
-    var HEIGHT = Math.floor((BAR.MAX_HEIGHT * times[i]) / maxTime);
-    if (players[i] === "Вы") {
+  for (var j = 0; j < players.length; j++) {
+    var HEIGHT = Math.floor((BAR.MAX_HEIGHT * times[j]) / maxTime);
+    if (players[j] === `Вы`) {
       ctx.fillStyle = `rgba(255, 0, 0, 1)`;
     } else {
       ctx.fillStyle = `hsl(240, ${Math.random() * 100 + `%`}, 50%)`;
     }
     ctx.fillRect(BAR.X, BAR.Y, BAR.WIDTH, HEIGHT);
     BAR.X += BAR.WIDTH_BETWEEN_BARS;
-    ctx.fillStyle = "black";
-    ctx.fillText(Math.floor(times[i]), PLAYER_TIME.X, HEIGHT + PLAYER_TIME.Y);
+    ctx.fillStyle = `black`;
+    ctx.fillText(Math.floor(times[j]), PLAYER_TIME.X, HEIGHT + PLAYER_TIME.Y);
     PLAYER_TIME.X += BAR.WIDTH_BETWEEN_BARS;
-    console.log(HEIGHT);
   }
 };
