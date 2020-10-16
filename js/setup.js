@@ -49,18 +49,20 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-var getArrayOfWizards = function (quantityOfWizards) {
-  var getRandomWizard = function (firstName, secondName, coatColor, eyesColor) {
-    var getRandomData = function (arr) {
-      return arr[Math.floor(Math.random() * Math.floor(arr.length))];
-    };
-    var someWizard = {
-      name: `${getRandomData(firstName)} ${getRandomData(secondName)}`,
-      coatColor: getRandomData(coatColor),
-      eyesColor: getRandomData(eyesColor),
-    };
-    return someWizard;
+var getRandomData = function (arr) {
+  return arr[Math.floor(Math.random() * Math.floor(arr.length))];
+};
+
+var getRandomWizard = function (firstName, secondName, coatColor, eyesColor) {
+  var someWizard = {
+    name: `${getRandomData(firstName)} ${getRandomData(secondName)}`,
+    coatColor: getRandomData(coatColor),
+    eyesColor: getRandomData(eyesColor),
   };
+  return someWizard;
+};
+
+var getArrayOfWizards = function (quantityOfWizards) {
   var randomWizards = [];
   for (var j = 0; j < quantityOfWizards; j++) {
     randomWizards.push(getRandomWizard(WIZARD_FIRST_NAMES, WIZARD_SECOND_NAMES, COAT_COLORS, EYES_COLORS));
