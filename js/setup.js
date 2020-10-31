@@ -39,7 +39,8 @@ var EYES_COLORS = [
 ];
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var userIconButton = document.querySelector('.setup-open');
+var userDialogCloseButton = document.querySelector('.setup-close');
 
 document.querySelector('.setup-similar').classList.remove('hidden');
 
@@ -89,5 +90,37 @@ var fillSimilarList = function (wizardsArray) {
 };
 fillSimilarList(wizards);
 
+var onPopupEscPress = function (evt) {
+  var setupUserName = document.querySelector('.setup-user-name');
+  if (evt.key === 'Escape' && evt.target !== setupUserName) {
+    evt.preventDefault();
+    closeUserDialog();
+  }
+};
+var openUserDialog = function () {
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+var closeUserDialog = function () {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+userIconButton.addEventListener('click', function () {
+  openUserDialog();
+});
+userIconButton.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    openUserDialog();
+  }
+});
+userDialogCloseButton.addEventListener('click', function () {
+  closeUserDialog();
+});
+userDialogCloseButton.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    evt.preventDefault();
+    closeUserDialog();
+  }
+});
