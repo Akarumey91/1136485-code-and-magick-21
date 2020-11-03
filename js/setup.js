@@ -133,21 +133,11 @@ userDialogCloseButton.addEventListener('keydown', function (evt) {
   }
 });
 
-var count = 0;
-
 var changeColor = function (array, parameter) {
-  if (count === array.length - 1) {
-    count = -1;
-  }
-  count++;
-  parameter.style.fill = array[count];
+  parameter.style.fill = getRandomData(array);
 };
 var changeFireballColor = function (array, parameter) {
-  if (count === array.length - 1) {
-    count = -1;
-  }
-  count++;
-  parameter.style.backgroundColor = array[count];
+  parameter.style.backgroundColor = getRandomData(array);
 };
 
 wizardCoat.addEventListener('click', function () {
