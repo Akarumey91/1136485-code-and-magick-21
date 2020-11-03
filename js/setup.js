@@ -10,7 +10,6 @@ var WIZARD_FIRST_NAMES = [
   'Люпита',
   'Вашингтон'
 ];
-
 var WIZARD_SECOND_NAMES = [
   'да Марья',
   'Верон',
@@ -21,7 +20,6 @@ var WIZARD_SECOND_NAMES = [
   'Нионго',
   'Ирвинг'
 ];
-
 var COAT_COLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -37,12 +35,23 @@ var EYES_COLORS = [
   'yellow',
   'green'
 ];
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
 
 var userDialog = document.querySelector('.setup');
 var userIconButton = document.querySelector('.setup-open');
 var userDialogCloseButton = document.querySelector('.setup-close');
+var userNameInput = document.querySelector('.setup-user-name');
+var wizardCoat = document.querySelector('.wizard-coat');
+var wizardEyes = document.querySelector('.wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
-document.querySelector('.setup-similar').classList.remove('hidden');
+// document.querySelector('.setup-similar').classList.remove('hidden');
 
 var similarListElement = document.querySelector('.setup-similar-list');
 
@@ -91,8 +100,7 @@ var fillSimilarList = function (wizardsArray) {
 fillSimilarList(wizards);
 
 var onPopupEscPress = function (evt) {
-  var setupUserName = document.querySelector('.setup-user-name');
-  if (evt.key === 'Escape' && evt.target !== setupUserName) {
+  if (evt.key === 'Escape' && evt.target !== userNameInput) {
     evt.preventDefault();
     closeUserDialog();
   }
@@ -123,4 +131,31 @@ userDialogCloseButton.addEventListener('keydown', function (evt) {
     evt.preventDefault();
     closeUserDialog();
   }
+});
+
+var count = 0;
+
+var changeColor = function (array, parameter) {
+  if (count === array.length - 1) {
+    count = -1;
+  }
+  count++;
+  parameter.style.fill = array[count];
+};
+var changeFireballColor = function (array, parameter) {
+  if (count === array.length - 1) {
+    count = -1;
+  }
+  count++;
+  parameter.style.backgroundColor = array[count];
+};
+
+wizardCoat.addEventListener('click', function () {
+  changeColor(COAT_COLORS, wizardCoat);
+});
+wizardEyes.addEventListener('click', function () {
+  changeColor(EYES_COLORS, wizardEyes);
+});
+wizardFireball.addEventListener('click', function () {
+  changeFireballColor(FIREBALL_COLORS, wizardFireball);
 });
